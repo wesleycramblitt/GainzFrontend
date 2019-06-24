@@ -1,0 +1,16 @@
+{
+  "name": "gainz",
+  "version": "1.0.0",
+  "description": "generate workout routines",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "author": "Wesley Cramblitt",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.12",
+    "nodemailer": "^5.1.1"
+  }
+}

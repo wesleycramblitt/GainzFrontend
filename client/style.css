@@ -1,0 +1,240 @@
+  body {
+
+    background-color: rgb(235, 235, 235);
+        font-family: 'Fira Sans', sans-serif;
+        color:#000;
+        margin:0;
+        padding-bottom:500px;
+    }
+
+
+
+    #nav {
+        height:4em;
+        background: #333;
+        width:100%;
+        
+        
+    }
+    .mainSection {
+        width:50%;
+        height:100%;
+        margin-left:25%;
+
+    }
+    @media only screen and (max-width: 900px) {
+      .mainSection {
+        width:100%;
+        height:100%;
+        margin-left:0;
+      }
+
+    }
+
+    .inlineLabel {
+     display:inline-block; 
+     width:50%;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .inlineLabel {
+        display:inline-block; 
+        width:90%;
+       }
+    }
+
+
+    .padded {
+        padding:1em;
+    }
+ 
+    select > option {
+        padding:0.5em;
+    }
+
+    button {
+        padding:0.5em;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 2.3em;
+    }
+
+    h6,h5,h4,h3,h2,h1 {
+        padding-top: 1em;
+        padding-bottom: 1em;
+        margin:0;
+        
+    }
+
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        background-color:white;
+      }
+      
+      /* On mouse-over, add a deeper shadow */
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      }
+
+    /* Custom Range *******************************/
+
+
+    input[type="range"] { 
+        margin: 1em;
+        -webkit-appearance: none;
+        position: relative;
+        overflow: hidden;
+        height: 30px;
+        width: 90%;
+        cursor: pointer;
+        border: #000 solid 1px;
+        border-radius: 0; /* iOS */
+    }
+
+    ::-webkit-slider-runnable-track {
+        background: #ddd;
+    }
+
+    /*
+    * 1. Set to 0 width and remove border for a slider without a thumb
+    */
+    ::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px; /* 1 */
+        height: 40px;
+        background: #fff;
+        box-shadow: -100vw 0 0 100vw rgb(80, 126, 1);
+        border: 2px solid #999; /* 1 */
+    }
+
+    ::-moz-range-track {
+        height: 40px;
+        background: #ddd;
+    }
+
+    ::-moz-range-thumb {
+        background: #fff;
+        height: 40px;
+        width: 20px;
+        border: 3px solid #999;
+        border-radius: 0 !important;
+        box-shadow: -100vw 0 0 100vw rgb(80, 126, 1);
+        box-sizing: border-box;
+    }
+
+    ::-ms-fill-lower { 
+        background: rgb(80, 126, 1);
+    }
+
+    ::-ms-thumb { 
+        background: #fff;
+        border: 2px solid #999;
+        height: 40px;
+        width: 20px;
+        box-sizing: border-box;
+    }
+
+    ::-ms-ticks-after { 
+        display: none; 
+    }
+
+    ::-ms-ticks-before { 
+        display: none; 
+    }
+
+    ::-ms-track { 
+        background: #ddd;
+        color: transparent;
+        height: 40px;
+        border: none;
+    }
+
+    ::-ms-tooltip { 
+        display: none;
+    }
+
+    /********************/
+
+    /**Loading***/
+    .spinner {
+   
+        margin: 40px auto;
+        width: 60px;
+        height: 60px;
+        position: relative;
+      }
+      
+      .cube1, .cube2 {
+        background-color: #333;
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
+        animation: sk-cubemove 1.8s infinite ease-in-out;
+      }
+      
+      .cube2 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+      }
+      
+      @-webkit-keyframes sk-cubemove {
+        25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
+        50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+        75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+        100% { -webkit-transform: rotate(-360deg) }
+      }
+      
+      @keyframes sk-cubemove {
+        25% { 
+          transform: translateX(42px) rotate(-90deg) scale(0.5);
+          -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+        } 50% { 
+          transform: translateX(42px) translateY(42px) rotate(-179deg);
+          -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+        } 50.1% { 
+          transform: translateX(42px) translateY(42px) rotate(-180deg);
+          -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+        } 75% { 
+          transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+          -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+        } 100% { 
+          transform: rotate(-360deg);
+          -webkit-transform: rotate(-360deg);
+        }
+      }
+
+
+
+.imgMultiSelected {
+    background-color: rgba(209, 243, 16, 0.7);
+}
+
+.greenButton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.blueButton {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
