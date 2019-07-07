@@ -209,7 +209,9 @@ class WorkoutSettings extends React.Component {
                         id="workoutSettingsForm"
                         noValidate
                         validated={this.state.validated}
-                        onSubmit={e => this.handleSubmit(e)}>
+                        onSubmit={e => this.handleSubmit(e)}
+                        style={{paddingTop:"0.5em"}}>
+                        <hr/>
                         <Form.Group controlId="volume">
                             <Form.Label>Volume </Form.Label>
 
@@ -337,7 +339,7 @@ class WorkoutSettings extends React.Component {
                         <Card.Header>Generator Settings</Card.Header>
                         <Card.Body>
                         { (!this.props.submitted) ? presets : null}
-                        <hr/>
+                     
                         { (!this.props.submitted) ? form : null}
                         { (!this.props.submitted) ? null : generateAnother}
                         

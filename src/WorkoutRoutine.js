@@ -16,11 +16,19 @@ const spinner = {
 class WorkoutRoutine extends React.Component {
     constructor(props) {
       super(props);
+      this.state = {scrolledIntoView:false};
     }
-    
+
     componentDidUpdate() {
-      if (this.props.isLoaded == true) {
+      if (this.props.isLoaded == true && this.state.scrollIntoView == false) {
           ReactDOM.findDOMNode(this).scrollIntoView({behavior: "smooth"});
+          this.setState({scrollIntoView:true});
+      }
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.isLoaded == undefined || nextProps.isLoaded == false) {
+        this.setState({scrollIntoView:false});
       }
     }
 

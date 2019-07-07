@@ -8,6 +8,7 @@ import WorkoutGenerator from './WorkoutGenerator.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.workoutGenerator = React.createRef();
   }
 
   render() { 
@@ -15,8 +16,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navigation/>
-        <Welcome />
-        <WorkoutGenerator />
+        <Welcome scrollTo={this.workoutGenerator} />
+        <WorkoutGenerator ref={this.workoutGenerator}/>
 
       </div>
     );
