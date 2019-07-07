@@ -1,0 +1,13 @@
+.imgSelected {
+    border: 4px solid #28a745 !important;
+}
+
+.equipmentImg {
+    border: 4px solid rgba(200,200,200,1);
+    margin:0.25em;
+}
+
+.equipmentImg:hover {
+    opacity: 0.9;
+
+}

@@ -12,11 +12,14 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
 import InputRange from './InputRange';
+import EquipmentSelector from './EquipmentSelector'
 
 import fatLoss from './img/fatLoss.jpg';
 import gainMuscle from './img/gainMuscle.jpg';
 import strengthTraining from './img/strengthTraining.jpg';
 import gvt from './img/gvt.png';
+
+
 
 
 
@@ -199,7 +202,19 @@ class WorkoutSettings extends React.Component {
                     <div className="m-1">
                         <Image id="gvt" rounded fluid  className="presetImage"
                         src={gvt} onClick={e => {this.selectPreset(e.target.id)}} />
-                        <span className="text-secondary">GVT is German Volume Training.</span>
+                        <div className="text-center">
+                        <span>GVT</span>
+                        <OverlayTrigger trigger="click" placement="top" 
+                                overlay={
+                                    <Popover  title="GVT">
+                                        German Volume Training (GVT) is considered by many bodybuilders to be the best workout
+                                        routine structure for breaking plateaus and packing on muscle dramatically. It is very 
+                                        challenging and shouldn't be done for more than 4 weeks.
+                                    </Popover>
+                                }>
+                                <Button  variant="info" style={{marginLeft:"0.5em",width:"1em", height:"1.4em", padding:"0"}}>?</Button>
+                        </OverlayTrigger>
+                        </div>
                     </div>
                 </Col>
 
@@ -287,7 +302,6 @@ class WorkoutSettings extends React.Component {
   
                         </Form.Group>
 
-
                         <Form.Group>
                             <Form.Label>Workouts per muscle</Form.Label>
                             <OverlayTrigger trigger="click" placement="top" 
@@ -312,9 +326,17 @@ class WorkoutSettings extends React.Component {
 
 
                           </Form.Group>
+
+                          <Form.Group>
+                                <Form.Label>Equipment</Form.Label>
+                                <EquipmentSelector exerciseTypes={this.state.exerciseTypes}
+                                    updateParentState={exerciseTypes => {this.setState({exerciseTypes:exerciseTypes})}
+                                     }/>
+                            </Form.Group>
+
                           { (this.state.error) ? error : null}
 
-                        <Col className="text-center">
+                        <Col className="text-center mt-3">
                             <Button className="btn btn-success" type="submit" >Generate</Button>
                         </Col>
                           
