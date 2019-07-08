@@ -17,7 +17,7 @@ class EquipmentSelector extends React.Component {
     }    
 
     updateExerciseTypes(value) {
-        console.log(this.state.exerciseTypes);
+
         var index = this.state.exerciseTypes.indexOf(value);
         
         if (index == -1) {
@@ -37,7 +37,7 @@ class EquipmentSelector extends React.Component {
     }
 
     getImageClassName(value) {
-        console.log("getImage");
+
         var className = "equipmentImg";
         if (value.length == undefined) {
             if (this.state.exerciseTypes.includes(value)) {

@@ -33,12 +33,10 @@ class WorkoutRoutine extends React.Component {
     }
 
     render() {
-
+      
       if (this.props.error) 
       {
-        return <Col id="workoutRoutine" xs={12} lg={9} className="mx-auto">
-                <Alert variant="danger">Error: {this.props.error.message}</Alert>
-              </Col>;
+        return <Alert variant="danger">Error: {this.props.error.message}</Alert>
       } 
       else if(this.props.isLoaded == undefined) {
         return <div id="workoutRoutine"></div>;
@@ -51,11 +49,6 @@ class WorkoutRoutine extends React.Component {
           </div>
         )
       }
-      else if (!Array.isArray(this.props.routineData)) {
-        return <Col id="workoutRoutine" xs={12} lg={9} className="mx-auto">
-                  <Alert variant="danger">{this.props.routineData}</Alert>
-              </Col>
-      }
       else {
         return (
           <Container id="workoutRoutine" fluid="true">
@@ -64,7 +57,42 @@ class WorkoutRoutine extends React.Component {
                   <Card >
                       <Card.Header>Workout Routine</Card.Header>
                       <Card.Body>
-                            {this.props.routineData.map((item, index) => (
+                          <Card>
+                              <Card.Header>Routine Summary</Card.Header>
+                              <Card.Body>
+                                <Row>
+                                <Col xs={12} lg={6}>
+                                    <label className="font-weight-bold pr-1">Volume: </label>
+                                    <span>{this.props.routineData.volume} reps per muscle</span>
+                                </Col>
+                                
+                                <Col xs={12} lg={6}>
+                                    <label className="font-weight-bold pr-1">Frequency: </label>
+                                    <span>{this.props.routineData.frequency} time(s) per week</span>
+                                </Col>
+                                <Col xs={12} lg={6}>
+                                  <label className="font-weight-bold pr-1">Rep Scheme: </label>
+                                  <span>{this.props.routineData.repScheme.sets} sets of {this.props.routineData.repScheme.reps} reps</span>
+                                </Col>
+                                <Col xs={12} lg={6}>
+                                  <label  className="font-weight-bold pr-1">Equipment: </label>
+                                  {
+                                    this.props.routineData.exerciseTypes.map((name, index) => (
+                                      (index == this.props.routineData.exerciseTypes.length-1) ?
+                                        <span>{name}</span> :
+                                        <span>{name}, </span>
+                                    ))
+                                  }
+                                </Col>
+                                <Col xs={12} lg={6}>
+                                  <label  className="font-weight-bold pr-1">Split: </label>
+                                  
+                                    <span> {this.props.routineData.splitName}</span>
+                                </Col>
+                                </Row>
+                              </Card.Body>
+                          </Card>
+                            {this.props.routineData.workoutDays.map((item, index) => (
                             (item.isRest) ?
                             <Row className="mb-3 mt-1" key={"routineData"+index}>
                                 <Col xs={12}  className="mx-auto">

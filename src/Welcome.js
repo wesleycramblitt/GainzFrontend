@@ -13,16 +13,8 @@ class Welcome extends React.Component {
         return (
             <Container fluid="true">
                 <Row className="" >
-                    <Col xs={12} lg={9} className="mx-auto pl-0 pr-0">
-                        <Card>
-                            <Card.Header>Getting Started</Card.Header>
-                            <Card.Body>
-                                <Row>
-                                    <Col xs={12} md={6} className="mx-auto">
-                                        <Image src={logo} rounded fluid />
-                                    </Col>
-                                </Row>
-                                <Row>
+                    <Col xs={12} lg={9} className="mx-auto pl-0 pr-0 mt-2 mb-4">
+
                                 <Col className="text-center">
                                 <h4 className="mb-3 mt-3">
                                     Welcome to Gainz Intelligent Workout Routine Generator!
@@ -44,9 +36,6 @@ class Welcome extends React.Component {
                                             Get Started</Button>
                                     </Col>
                                 </Col>
-                                </Row>
-                            </Card.Body>
-                        </Card>
                     </Col>
                 </Row>
             </Container>

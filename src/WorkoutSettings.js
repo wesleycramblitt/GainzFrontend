@@ -32,7 +32,7 @@ class WorkoutSettings extends React.Component {
             repRange: 2,
             frequency: 3,
             variation: 1,
-            exerciseTypes: [2,3,4,5,6],
+            exerciseTypes: [2,3],
             validated: false,
             error: null
         };
@@ -143,8 +143,11 @@ class WorkoutSettings extends React.Component {
         data.RepScheme.Reps = reps;
         data.RepScheme.Sets = sets;
 
-
+        
         data.ExerciseTypes = this.state.exerciseTypes;
+        if (data.ExerciseTypes.length == 0) {
+            data.ExerciseTypes = [0,1,2,3,5,6];
+        }
 
         return data;
     }
@@ -328,7 +331,18 @@ class WorkoutSettings extends React.Component {
                           </Form.Group>
 
                           <Form.Group>
-                                <Form.Label>Equipment</Form.Label>
+                                <Form.Label>Equipment (optional)</Form.Label>
+                                <OverlayTrigger trigger="click" placement="top" 
+                                overlay={
+                                    <Popover  title="Equipment">
+                                        Select equipment that you prefer to use or that you have available. For example, 
+                                        if you prefer to workout at home and don't have any equipment at all, you can select "Bodyweight".
+                                        <br/><br/>
+                                        Equipment is optional, so if you don't select it the generator will assume you have access to all equipment.
+                                    </Popover>
+                                }>
+                                <Button variant="info" style={{marginLeft:"0.5em",width:"1em", height:"1.4em", padding:"0"}}>?</Button>
+                            </OverlayTrigger>
                                 <EquipmentSelector exerciseTypes={this.state.exerciseTypes}
                                     updateParentState={exerciseTypes => {this.setState({exerciseTypes:exerciseTypes})}
                                      }/>
@@ -360,10 +374,12 @@ class WorkoutSettings extends React.Component {
                     <Card >
                         <Card.Header>Generator Settings</Card.Header>
                         <Card.Body>
-                        { (!this.props.submitted) ? presets : null}
+                        {/* { (!this.props.submitted) ? presets : null}
                      
                         { (!this.props.submitted) ? form : null}
-                        { (!this.props.submitted) ? null : generateAnother}
+                        { (!this.props.submitted) ? null : generateAnother} */}
+                        {presets}
+                        {form}
                         
                         </Card.Body>
                     </Card>
