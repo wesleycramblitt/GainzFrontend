@@ -50,7 +50,7 @@ class WorkoutGenerator extends React.Component {
     }
 
     loadRoutine(workoutSettings) {
-        this.setState({submitted:true, routineLoaded:false});
+        this.setState({submitted:true, routineLoaded:false, error:undefined});
 
         api.getWorkoutRoutine(workoutSettings)
           .then(res => res.json())

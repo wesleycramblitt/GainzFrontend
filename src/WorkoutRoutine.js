@@ -6,6 +6,9 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Alert from 'react-bootstrap/Alert';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import Button from 'react-bootstrap/Button';
 
 const spinner = {
     width: '10em',
@@ -36,8 +39,17 @@ class WorkoutRoutine extends React.Component {
       
       if (this.props.error) 
       {
-        return <Alert variant="danger">Error: {this.props.error.message}</Alert>
+        return <Col xs={12} lg={9} className="mx-auto pl-0 pr-0">
+                  <Alert variant="danger">Error: {this.props.error.message}</Alert>
+                </Col>
+
       } 
+      else if(this.props.routineData.failed)
+      {
+        return <Col xs={12} lg={9} className="mx-auto pl-0 pr-0">
+                  <Alert variant="warning">Error: {this.props.routineData.failureMessage}</Alert>
+              </Col>
+      }
       else if(this.props.isLoaded == undefined) {
         return <div id="workoutRoutine"></div>;
       }
@@ -61,9 +73,21 @@ class WorkoutRoutine extends React.Component {
                               <Card.Header>Routine Summary</Card.Header>
                               <Card.Body>
                                 <Row>
+                                <Col xs={12}>
+                                    <label className="font-weight-bold pr-1">Name: </label>
+                                    <span>{this.props.routineData.name}</span>
+                                    <OverlayTrigger trigger="click" placement="top" 
+                                        overlay={
+                                            <Popover  title="Name">
+                                                Names are randomly generated.
+                                            </Popover>
+                                        }>
+                                        <Button variant="info" style={{marginLeft:"0.5em",width:"1em", height:"1.4em", padding:"0"}}>?</Button>
+                                    </OverlayTrigger>
+                                </Col>
                                 <Col xs={12} lg={6}>
                                     <label className="font-weight-bold pr-1">Volume: </label>
-                                    <span>{this.props.routineData.volume} reps per muscle</span>
+                                    <span>{this.props.routineData.volume} rep(s) per muscle</span>
                                 </Col>
                                 
                                 <Col xs={12} lg={6}>
@@ -72,7 +96,7 @@ class WorkoutRoutine extends React.Component {
                                 </Col>
                                 <Col xs={12} lg={6}>
                                   <label className="font-weight-bold pr-1">Rep Scheme: </label>
-                                  <span>{this.props.routineData.repScheme.sets} sets of {this.props.routineData.repScheme.reps} reps</span>
+                                  <span>{this.props.routineData.repScheme.sets} set(s) of {this.props.routineData.repScheme.reps} rep(s)</span>
                                 </Col>
                                 <Col xs={12} lg={6}>
                                   <label  className="font-weight-bold pr-1">Equipment: </label>
