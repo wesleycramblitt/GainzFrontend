@@ -103,8 +103,8 @@ class WorkoutRoutine extends React.Component {
                                   {
                                     this.props.routineData.exerciseTypes.map((name, index) => (
                                       (index == this.props.routineData.exerciseTypes.length-1) ?
-                                        <span>{name}</span> :
-                                        <span>{name}, </span>
+                                        <span key={"types"+index}>{name}</span> :
+                                        <span key={"types"+index}>{name}, </span>
                                     ))
                                   }
                                 </Col>

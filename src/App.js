@@ -3,8 +3,7 @@ import './css/App.css';
 import Navigation from './Navigation.js';
 import Welcome from './Welcome.js';
 import WorkoutGenerator from './WorkoutGenerator.js';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +18,13 @@ class App extends React.Component {
         <Navigation/>
         <Welcome scrollTo={this.workoutGenerator} />
         <WorkoutGenerator ref={this.workoutGenerator}/>
+        <footer className="container-fluid footer">
+          <div className="row h-100">
+            <div className="col-12 text-center my-auto">
+              <small>Copyright @2019 Gainz</small>
+            </div>
+            </div>
+        </footer>
       </div>
     );
   }
