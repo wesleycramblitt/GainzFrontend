@@ -335,14 +335,18 @@ class WorkoutSettings extends React.Component {
                                 <OverlayTrigger trigger="click" placement="top" 
                                 overlay={
                                     <Popover  title="Equipment">
-                                        Select equipment that you prefer to use or that you have available. For example, 
-                                        if you prefer to workout at home and don't have any equipment at all, you can select "Bodyweight".
+                                        Select equipment that you prefer to use or that you have available. Barbells and Dumbbells are selected by default.
+                                        <br/><br/>
+                                        If you prefer bodyweight exercises, I recommend selecting both bodyweight and bodyweight equipment (pullup bars, dip bars)
+                                        <br/><br/>
+                                        The generated routine guide has information on where to find equipment for your workouts.
                                         <br/><br/>
                                         Equipment is optional, so if you don't select it the generator will assume you have access to all equipment.
                                     </Popover>
                                 }>
                                 <Button variant="info" style={{marginLeft:"0.5em",width:"1em", height:"1.4em", padding:"0"}}>?</Button>
-                            </OverlayTrigger>
+                                </OverlayTrigger>
+
                                 <EquipmentSelector exerciseTypes={this.state.exerciseTypes}
                                     updateParentState={exerciseTypes => {this.setState({exerciseTypes:exerciseTypes})}
                                      }/>
