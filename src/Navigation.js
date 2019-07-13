@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-
+import logo from './img/logo.PNG'
 
 class Navigation extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class Navigation extends React.Component {
                         <img
                             alt=""
                             height="40"
-                            src="/logo.png"
+                            src={logo}
                             className="d-inline-block align-top"
                         />            
                     </Navbar.Brand>
