@@ -187,7 +187,7 @@ class PDFCreator {
         pdfCreator.addHeading2("Progressive Overload");
         pdfCreator.addParagraph("Progressive overload is the key to making progress in a workout routine. Simple stated, it is accomplished by adding more volume, doing more weight, or taking shorter breaks in between sets. If you are not progressively overloading it is very unlikely that you are going to significantly change your level of fitness. That is why it is important to track your performance and to plan to increase performance each week.");
 
-        //pdfCreator.addPage();
+        pdfCreator.addPage();
         pdfCreator.addHeading2("Rest Days");
         pdfCreator.addParagraph("Rest days are when your body changes! As your body heals from past workouts, you get stronger, better, leaner, whatever your goal is. It is important to get your blood moving on a rest day and to continue to eat properly. Some good rest day activities include walking, a light jog, hiking, or other light exercises. This helps your body heal faster by way of nutrients in the blood stream.");
         
