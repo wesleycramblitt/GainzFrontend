@@ -51,12 +51,12 @@ class WorkoutRoutine extends React.Component {
               </Col>
       }
       else if(this.props.isLoaded == undefined) {
-        return <div id="workoutRoutine"></div>;
+        return <div ></div>;
       }
       else if (!this.props.isLoaded) 
       {
         return (
-          <div id="workoutRoutine" className="fixedCenter">
+          <div  className="fixedCenter">
                 <Spinner animation="grow" variant="success" style={spinner}></Spinner>
           </div>
         )

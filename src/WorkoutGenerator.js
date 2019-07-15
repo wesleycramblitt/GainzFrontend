@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import PDFCreator from './PDFCreator';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-
+import isWebview from 'is-webview';
 
 class WorkoutGenerator extends React.Component {
     constructor(props) {
@@ -20,7 +20,8 @@ class WorkoutGenerator extends React.Component {
           error:undefined, 
           submitted: false,
           showBackButton: false,
-          showDownloadButton: false
+          showDownloadButton: false,
+          showWebViewModal: false
         }
 
         this.emailForm = React.createRef();
@@ -36,6 +37,10 @@ class WorkoutGenerator extends React.Component {
 
     componentDidMount() {
       window.addEventListener('scroll', this.handleScroll);
+
+      if (isWebview(navigator.userAgent)) {
+            this.setState({showWebViewModal:true});
+      }
     }
   
     componentWillUnmount() {
@@ -135,7 +140,9 @@ class WorkoutGenerator extends React.Component {
     }
 
     downloadRoutine() {
-        PDFCreator.downloadRoutinePDF(this.state.routineData);
+
+          PDFCreator.downloadRoutinePDF(this.state.routineData);
+        
     }
 
     render() {
@@ -198,6 +205,17 @@ class WorkoutGenerator extends React.Component {
                     <Button variant="primary" type="submit">Submit</Button>
                   </Modal.Footer>
                   </Form>
+                </Modal>
+
+
+                <Modal show={this.state.showWebViewModal} onHide={() => {this.setState({showWebViewModal:false})}}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Open in Browser</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>Cannot download routines in an in app browser. Open Gainz in Chrome or Safari.</p>
+                  </Modal.Body>
+
                 </Modal>
             </div>
         );

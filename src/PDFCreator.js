@@ -11,7 +11,6 @@ import preworkout from './img/preworkout.jpg';
 import protein from './img/protein.jpg';
 import thermo from './img/thermogenic.jpg';
 
-
 class PDFCreator {
     constructor() {
         this.lMargin=15; //left margin in mm
@@ -116,7 +115,7 @@ class PDFCreator {
     }
 
     save() {
-        this.doc.save("routine.pdf");
+       this.doc.save("routine.pdf");
     }
 
     headingWithLink(heading,text,url) {
