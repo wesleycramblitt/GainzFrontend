@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import PDFCreator from './PDFCreator';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Sponsored from './Sponsored.js';
+
 
 class WorkoutGenerator extends React.Component {
     constructor(props) {
@@ -156,7 +156,7 @@ class WorkoutGenerator extends React.Component {
           downloadRoutine = (
             <div style={{position:"fixed",right:"3.8em",top:"0.5em"}}>
                 {/* <Button className="circle" onClick={() => {this.setState({showEmailModal:true})}}> */}
-                <Button className="circle" onClick={this.downloadRoutine}>
+                <Button variant="warning" className="circle" onClick={this.downloadRoutine}>
                   <MdGetApp></MdGetApp>
                 </Button>
             </div>
@@ -172,7 +172,7 @@ class WorkoutGenerator extends React.Component {
                 error ={this.state.error} routineData={this.state.routineData}  />
                 {backToSettings}
                 {downloadRoutine}
-                <Sponsored/>
+
                 <Modal show={this.state.showEmailModal} onHide={() => {this.setState({showEmailModal:false})}}>
                   <Modal.Header closeButton>
                     <Modal.Title>Download Workout Routine</Modal.Title>

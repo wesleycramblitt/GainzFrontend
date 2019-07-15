@@ -56,7 +56,7 @@ class WorkoutRoutine extends React.Component {
       else if (!this.props.isLoaded) 
       {
         return (
-          <div id="workoutRoutine" className="d-flex justify-content-center" style={{marginTop:"20vh"}}>
+          <div id="workoutRoutine" className="fixedCenter">
                 <Spinner animation="grow" variant="success" style={spinner}></Spinner>
           </div>
         )
