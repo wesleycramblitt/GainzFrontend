@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import PDFCreator from './PDFCreator';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import isWebview from 'is-webview';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 class WorkoutGenerator extends React.Component {
     constructor(props) {
@@ -21,7 +21,8 @@ class WorkoutGenerator extends React.Component {
           submitted: false,
           showBackButton: false,
           showDownloadButton: false,
-          showWebViewModal: false
+          showProgressModal: false,
+          pdfProgress: 0
         }
 
         this.emailForm = React.createRef();
@@ -32,20 +33,18 @@ class WorkoutGenerator extends React.Component {
         this.changeSettings = this.changeSettings.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
         this.scrollToSettings = this.scrollToSettings.bind(this);
-        this.downloadRoutine = this.downloadRoutine.bind(this);
+        this.setStateAsync = this.setStateAsync.bind(this);
     }
 
     componentDidMount() {
       window.addEventListener('scroll', this.handleScroll);
 
-      if (isWebview(navigator.userAgent)) {
-            this.setState({showWebViewModal:true});
-      }
     }
   
     componentWillUnmount() {
       window.removeEventListener('scroll', this.handleScroll);
     }
+
   
     handleScroll() {
       //Back to settings ////////////////////////////////
@@ -115,9 +114,18 @@ class WorkoutGenerator extends React.Component {
 
     }
 
-    submitEmailModal(event) {
+    //For instant renders
+    setStateAsync(state) {
+      return new Promise((resolve) => {
+        var generator = this;
+        setTimeout(function() {generator.setState(state, resolve)})
+      });
+  }
+
+    async submitEmailModal(event) {
 
       var form = event.currentTarget;
+
       event.preventDefault();
       event.stopPropagation();
 
@@ -126,23 +134,22 @@ class WorkoutGenerator extends React.Component {
       }
       
       var email = this.email.current.value;
-      this.email.current.value = ""; //clear ref
 
-      this.setState({showEmailModal:false});
-      api.subscribeEmail(email)
-      .then(res => res.json())
-      .then(
-        (result) => {
-            this.downloadRoutine();
+      await this.setStateAsync(
+        {
+          showEmailModal:false,
+          pdfProgress:5,
+          showProgressModal:true
         });
 
+      var pdfDataURI = await PDFCreator.getRoutinePDF(this.state.routineData, this.setStateAsync);
+      
 
-    }
 
-    downloadRoutine() {
+      await api.sendPDFToEmailAndSubscribe(email, pdfDataURI)
 
-          PDFCreator.downloadRoutinePDF(this.state.routineData);
-        
+      this.setState({pdfProgress:100});
+          
     }
 
     render() {
@@ -162,12 +169,24 @@ class WorkoutGenerator extends React.Component {
         if (this.state.showDownloadButton == true) {
           downloadRoutine = (
             <div style={{position:"fixed",right:"3.8em",top:"0.5em"}}>
-                {/* <Button className="circle" onClick={() => {this.setState({showEmailModal:true})}}> */}
-                <Button variant="warning" className="circle" onClick={this.downloadRoutine}>
+                <Button variant="warning" className="circle"  onClick={() => {this.setState({showEmailModal:true})}}>
                   <MdGetApp></MdGetApp>
                 </Button>
             </div>
           ) 
+        }
+
+        var pdfProgressMessage;
+        if (this.state.pdfProgress < 100) {
+            pdfProgressMessage = (
+              <p className="text-center">Creating Workout Routine PDF</p>
+            )
+        }
+        else
+        {
+          pdfProgressMessage = (
+            <p  className="text-center">Finished! Check your email.</p>
+          )
         }
 
         return (
@@ -180,9 +199,12 @@ class WorkoutGenerator extends React.Component {
                 {backToSettings}
                 {downloadRoutine}
 
+
+
+                {/* Email Modal ****************************************************** */}
                 <Modal show={this.state.showEmailModal} onHide={() => {this.setState({showEmailModal:false})}}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Download Workout Routine</Modal.Title>
+                    <Modal.Title>Send Workout Routine</Modal.Title>
                   </Modal.Header>
                   <Form 
                           ref={this.emailForm} 
@@ -191,12 +213,11 @@ class WorkoutGenerator extends React.Component {
                           validated="true"
                           >
                   <Modal.Body>
-                    <p>Please enter your email address to download your free workout routine.</p>
-                    <p>Emails will not be shared. They are only used to subscribe you to our newsletter.</p>
-                    <p>You can unsubscribe at any time.</p>
+                    <p>Please enter your email address to receive your free workout routine.</p>
+                    <p>Your email will not be shared with anyone else.</p>
                     <Form.Group>
                       <Form.Label>Email: </Form.Label>
-                      <Form.Control ref={this.email} type="text" placeholder="Email..." required></Form.Control>
+                      <Form.Control ref={this.email} type="email" placeholder="Email..." required></Form.Control>
                     </Form.Group>
                   </Modal.Body>
 
@@ -207,16 +228,22 @@ class WorkoutGenerator extends React.Component {
                   </Form>
                 </Modal>
 
-
-                <Modal show={this.state.showWebViewModal} onHide={() => {this.setState({showWebViewModal:false})}}>
+                {/* Routine PDFCreation Process Modal *************************************** */}
+                <Modal backdrop='static' show={this.state.showProgressModal} onHide={() => {this.setState({showProgressModal:false})}}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Open in Browser</Modal.Title>
+                    <Modal.Title>Progress</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <p>Cannot download routines in an in app browser. Open Gainz in Chrome or Safari.</p>
+                        {pdfProgressMessage}
+                        <ProgressBar striped animated variant="success" now={this.state.pdfProgress} />
                   </Modal.Body>
 
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => {this.setState({showProgressModal:false})}}>Close</Button>
+                  </Modal.Footer>
+
                 </Modal>
+
             </div>
         );
     }

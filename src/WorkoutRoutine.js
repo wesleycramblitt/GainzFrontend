@@ -23,6 +23,7 @@ class WorkoutRoutine extends React.Component {
     }
 
     componentDidUpdate() {
+      //After is loaded scroll into view
       if (this.props.isLoaded == true && this.state.scrollIntoView == false) {
           ReactDOM.findDOMNode(this).scrollIntoView({behavior: "smooth"});
           this.setState({scrollIntoView:true});
@@ -69,62 +70,56 @@ class WorkoutRoutine extends React.Component {
                   <Card >
                       <Card.Header>Workout Routine</Card.Header>
                       <Card.Body>
-                          <Card>
-                              <Card.Header>Routine Summary</Card.Header>
-                              <Card.Body>
-                                <Row>
-                                <Col xs={12}>
-                                    <label className="font-weight-bold pr-1">Name: </label>
-                                    <span>{this.props.routineData.name}</span>
-                                    <OverlayTrigger trigger="click" placement="top" 
-                                        overlay={
-                                            <Popover  title="Name">
-                                                Names are randomly generated.
-                                            </Popover>
-                                        }>
-                                        <Button variant="info" style={{marginLeft:"0.5em",width:"1em", height:"1.4em", padding:"0"}}>?</Button>
-                                    </OverlayTrigger>
-                                </Col>
-                                <Col xs={12} lg={6}>
-                                    <label className="font-weight-bold pr-1">Volume: </label>
-                                    <span>{this.props.routineData.volume} rep(s) per muscle</span>
-                                </Col>
-                                
-                                <Col xs={12} lg={6}>
-                                    <label className="font-weight-bold pr-1">Frequency: </label>
-                                    <span>{this.props.routineData.frequency} time(s) per week</span>
-                                </Col>
-                                <Col xs={12} lg={6}>
-                                  <label className="font-weight-bold pr-1">Rep Scheme: </label>
-                                  <span>{this.props.routineData.repScheme.sets} set(s) of {this.props.routineData.repScheme.reps} rep(s)</span>
-                                </Col>
-                                <Col xs={12} lg={6}>
-                                  <label  className="font-weight-bold pr-1">Equipment: </label>
-                                  {
-                                    this.props.routineData.exerciseTypes.map((name, index) => (
-                                      (index == this.props.routineData.exerciseTypes.length-1) ?
-                                        <span key={"types"+index}>{name}</span> :
-                                        <span key={"types"+index}>{name}, </span>
-                                    ))
-                                  }
-                                </Col>
-                                <Col xs={12} lg={6}>
-                                  <label  className="font-weight-bold pr-1">Split: </label>
-                                  
-                                    <span> {this.props.routineData.splitName}</span>
-                                </Col>
-                                </Row>
-                              </Card.Body>
-                          </Card>
+
+                          <Row>
+                          <Col xs={12}>
+                              <label className="font-weight-bold pr-1">Name: </label>
+                              <span>{this.props.routineData.name}</span>
+                              <OverlayTrigger trigger="click" placement="top" 
+                                  overlay={
+                                      <Popover  title="Name">
+                                          Names are randomly generated.
+                                      </Popover>
+                                  }>
+                                  <Button variant="info" style={{marginLeft:"0.5em",width:"1em", height:"1.4em", padding:"0"}}>?</Button>
+                              </OverlayTrigger>
+                          </Col>
+                          <Col xs={12} lg={6}>
+                              <label className="font-weight-bold pr-1">Volume: </label>
+                              <span>{this.props.routineData.volume} rep(s) per muscle</span>
+                          </Col>
+                          
+                          <Col xs={12} lg={6}>
+                              <label className="font-weight-bold pr-1">Frequency: </label>
+                              <span>{this.props.routineData.frequency} time(s) per week</span>
+                          </Col>
+                          <Col xs={12} lg={6}>
+                            <label className="font-weight-bold pr-1">Rep Scheme: </label>
+                            <span>{this.props.routineData.repScheme.sets} set(s) of {this.props.routineData.repScheme.reps} rep(s)</span>
+                          </Col>
+                          <Col xs={12} lg={6}>
+                            <label  className="font-weight-bold pr-1">Equipment: </label>
+                            {
+                              this.props.routineData.exerciseTypes.map((name, index) => (
+                                (index == this.props.routineData.exerciseTypes.length-1) ?
+                                  <span key={"types"+index}>{name}</span> :
+                                  <span key={"types"+index}>{name}, </span>
+                              ))
+                            }
+                          </Col>
+                          <Col xs={12} lg={6}>
+                            <label  className="font-weight-bold pr-1">Split: </label>
+                            
+                              <span> {this.props.routineData.splitName}</span>
+                          </Col>
+                          </Row>
+
                             {this.props.routineData.workoutDays.map((item, index) => (
                             (item.isRest) ?
                             <Row className="mb-3 mt-1" key={"routineData"+index}>
                                 <Col xs={12}  className="mx-auto">
                                     <Card >
-                                        <Card.Header>Day {index+1}</Card.Header>
-                                        <Card.Body>
-                                            <Card.Title>Rest</Card.Title>
-                                        </Card.Body>
+                                        <Card.Header>Day {index+1} - Rest</Card.Header>
                                     </Card> 
                                 </Col>
                             </Row>
@@ -132,39 +127,15 @@ class WorkoutRoutine extends React.Component {
                             <Row className="mb-3 mt-1"  key={"routineData"+index}>
                                 <Col xs={12}  className="mx-auto">
                                     <Card  className="bg-light">
-                                        <Card.Header>Day {index+1}</Card.Header>
+                                        <Card.Header>Day {index+1} - {item.name}</Card.Header>
                                         <Card.Body>
-                                        <Card.Title> {item.name}</Card.Title>
                                         {item.workouts.map(workout => (
-                                                    <Card  key={workout.exercise.name}>
-
-                                                          <Card.Body>
-                                                              <Card.Title>{workout.exercise.name}</Card.Title>
-                                                              <div>
-                                                                    <label className="form-label">Muscles Worked:  </label>
-
-                                                                    {workout.exercise.exerciseMuscles.map((exerciseMuscle,i) =>
-                                                                      {
-                                                                        if (i == workout.exercise.exerciseMuscles.length -1) {
-                                                                          return (" "+exerciseMuscle.muscle.name );
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            return (" "+exerciseMuscle.muscle.name + ", ");
-                                                                        }
-                                                                        
-                                                                    })}
-                                                                </div>
-                                                                <div>{workout.repScheme.sets} set(s) of {workout.repScheme.reps} reps</div>
-                                                                <div>  <a  target="_blank" 
-                                                              href={"https://www.google.com/search?q="+workout.exercise.name.replace(" ", "+")}
-                                                              >Demonstration</a>
-                                                              </div>
-
-                                                          </Card.Body>
-                                                      
-                                                    </Card>
-
+                                           <div  key={workout.exercise.name}>
+                                                <a  target="_blank" href={"https://www.google.com/search?q="+workout.exercise.name.replace(" ", "+")}> 
+                                                {workout.exercise.name}
+                                                </a>
+                                                {/* {workout.repScheme.sets} set(s) of {workout.repScheme.reps} reps*/}
+                                            </div>
                                             ))}
                                             
                                         </Card.Body>

@@ -18,7 +18,7 @@ class App extends React.Component {
         <Navigation/>
         <Welcome scrollTo={this.workoutGenerator} />
         <WorkoutGenerator ref={this.workoutGenerator}/>
-        <div style={{height:"100vh"}}></div>
+        <div style={{height:"50vh"}}></div>
         <footer className="container-fluid footer">
           <div className="row h-100">
             <div className="col-12 text-center my-auto">

@@ -40,17 +40,17 @@ class WorkoutSettings extends React.Component {
     }
 
     handleSubmit(event) {
-        const form = event.currentTarget;
+
         event.preventDefault();
         event.stopPropagation();
 
         this.setState({validated:true, error:null});
-        if (form.checkValidity() === true) {
-            var data = this.buildWorkoutSettings();
-            if (data !== undefined) {
-                this.props.loadRoutine(data)
-            }
+
+        var data = this.buildWorkoutSettings();
+        if (data !== undefined) {
+            this.props.loadRoutine(data)
         }
+        
         
     }
 
@@ -225,8 +225,6 @@ class WorkoutSettings extends React.Component {
         );
         var form =   (<Form 
                         id="workoutSettingsForm"
-                        noValidate
-                        validated={this.state.validated}
                         onSubmit={e => this.handleSubmit(e)}
                         style={{paddingTop:"0.5em"}}>
                         <hr/>

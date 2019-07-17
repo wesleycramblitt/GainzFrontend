@@ -118,6 +118,10 @@ class PDFCreator {
        this.doc.save("routine.pdf");
     }
 
+    getURI() {
+        return this.doc.output("datauristring");
+    }
+
     headingWithLink(heading,text,url) {
         var Y = this.Y;
         this.addHeading3(heading);
@@ -146,8 +150,9 @@ class PDFCreator {
         this.Y+= this.spacing+5;
     }
 
-    static downloadRoutinePDF(routinedata) {
+    static async getRoutinePDF(routinedata, setStateAsync) {
 
+        
         var pdfCreator = new PDFCreator();
 
         pdfCreator.addImage(logo, 'PNG', 100,45);
@@ -165,7 +170,7 @@ class PDFCreator {
         pdfCreator.addHeading1("Workout Routine Basics");
         
         pdfCreator.addParagraph("It is important to understand basic workout routine terminology and have a plan set in place as you move forward in your fitness journey.");
-
+        await setStateAsync({pdfProgress:10});
         pdfCreator.addHeading2("Volume");
 
         pdfCreator.addParagraph("Volume is the number of reps performed usually measured per muscle per week. 60 reps a week is considered low while 120 reps a week is considered very high. In the case of bodyweight, this number can be much higher as you progress.");
@@ -173,6 +178,8 @@ class PDFCreator {
         pdfCreator.addHeading2("Rep Scheme");
 
         pdfCreator.addParagraph("The number of reps you do at a time has been found to directly correlate to which muscle fibers are activated. The general accepted standard is that 1-5 reps (very heavy weight) is for training strength, 6-12 reps (medium to heavy weight) is for training for muscular size, and 12 reps or above with lighter weight is for training muscular endurance. However, it should be noted that some people, especially in the world of bodyweight training, believe that doing extremely high volume sets result in great increases in muscular size. For example, doing 1000 pushups in a day to acquire a large chest. No one has reached a definitive scientific conclusion on either strategy. However, I think “all roads lead to Rome” applies in this scenario. I can assure you that whether you do 1000 pushups a day or if you bench press in the 6-12 reps range you will build muscle with the proper diet, which we will get to later.");
+        
+
 
         pdfCreator.addHeading2("Frequency");
         pdfCreator.addParagraph("Frequency is the number of times per week that a muscle is worked. Many trainers argue that a more frequency is better than less frequency. Specifically, that two to three times a week is perfect for most training goals. This results in a functional training system where the body is worked as a complete unit and tends to result in a more athletic build and functional body.");
@@ -182,7 +189,7 @@ class PDFCreator {
         pdfCreator.addHeading2("Workout Technique");
         pdfCreator.addParagraph("Gainz generator does not include instruction on form, but instead links you to a google search on specific workouts. It is very important that you learn and practice proper form on each workout. Never go heavier than you can lift with perfect range of motion and form. There is a wealth of knowledge online on how to perform each exercise.");
 
-
+        await setStateAsync({pdfProgress:20});
         pdfCreator.addHeading2("Progressive Overload");
         pdfCreator.addParagraph("Progressive overload is the key to making progress in a workout routine. Simple stated, it is accomplished by adding more volume, doing more weight, or taking shorter breaks in between sets. If you are not progressively overloading it is very unlikely that you are going to significantly change your level of fitness. That is why it is important to track your performance and to plan to increase performance each week.");
 
@@ -194,6 +201,7 @@ class PDFCreator {
         pdfCreator.addHeading1("Workout Equipment");
         pdfCreator.addParagraph("Most people prefer to get a gym membership and use the equipment available at the gym. If that is your preference, there is nothing wrong with that. However, there are a few drawbacks to a traditional gym membership that I have noticed, especially if you are a beginner:");
 
+
         pdfCreator.addParagraph("It can be embarrassing to learn new movements in front of others, at the most convenient hours of the day gyms become busy and you have to wait in line to access equipment, you may be rushed to finish your sets, and especially in the case of women, you may have to deal with the “Gym bros” trying to hit on you or creepily staring at you from the corner of the room. My solution to this problem was to purchase at home equipment.");
         
         pdfCreator.addParagraph("With your own equipment, you will be able to privately practice new movements, take as long as you like to workout without worrying about others, blast any music you prefer to listen to, and workout whenever you like without worrying about traffic and how busy the gym is.");
@@ -202,7 +210,6 @@ class PDFCreator {
         pdfCreator.addParagraph(`If you are interested in a bodyweight program, at the very least you will need a way to do pullups and a way to do dips. Most other bodyweight workouts don’t require any equipment. So, I have included a few popular equipment options below:`);
 
         pdfCreator.addParagraph("For an all in one solution:");
-
         pdfCreator.addImage(powertower, 'jpg', 50,60);
 
         pdfCreator.link("Power Tower", "https://amzn.to/2l4F534");
@@ -216,7 +223,7 @@ class PDFCreator {
         pdfCreator.addImage(dips, 'jpg', 50,50);
 
         pdfCreator.link("Dip Bar", "https://amzn.to/2l7jd7f");
-
+        await setStateAsync({pdfProgress:20});
 
         pdfCreator.addHeading2("Weighted Equipment");
         pdfCreator.addParagraph("Most weighted programs rely on barbells and dumbbells, which have been proven to activate more muscle fibers and stabilizer muscles, resulting in greater improvements in hypertrophy and strength. However, some people prefer machines and cables because of injuries, having limited ranges of motion, or just prefering the isolation that a machine provides. Either way here are some recommendations for at home weighted equipment:");
@@ -224,7 +231,7 @@ class PDFCreator {
         pdfCreator.addParagraph("My personal favorite home gym option, although more expensive, you are getting the most bang for your buck with this option:");
 
         pdfCreator.addParagraph("Barbell for performing all lifts:");
-
+        await setStateAsync({pdfProgress:30});
         pdfCreator.addImage(barbell, 'jpg', 50,50);
 
         pdfCreator.link("Barbell", "https://amzn.to/2jEOiia");
@@ -248,7 +255,7 @@ class PDFCreator {
         pdfCreator.addImage(machine, 'jpg', 50,50);
 
         pdfCreator.link("Machine Total Gym", "https://amzn.to/2l75qNS");
-
+        await setStateAsync({pdfProgress:40});
 
         pdfCreator.addPage();
         //Nutrition//////////////////////////////////
@@ -260,7 +267,7 @@ class PDFCreator {
         pdfCreator.addParagraph("Carbohydrates- Found in Potatoes, rice, bread, and in small amounts in vegetables. Carbohydrates are energy. Too much energy that isn’t used is stored as fat. Remember that.");
         
         pdfCreator.addParagraph("Fat- Found in nuts, oils, and small amounts in meat. Fat is essential for health, inflammatory control, blood clotting, and brain development. ");
-
+        await setStateAsync({pdfProgress:50});
         pdfCreator.addHeading2("Losing Fat");
         pdfCreator.addParagraph("To lose fat and preserve muscle, you should decrease carbohydrates and increase protein while cutting total calories. A good macro ratio for fat loss is 30% fat, 40% carbs, and 30% protein. For more information on popular fat loss diets, Lookup the Keto diet or the Paleo diet.");
                 
@@ -286,7 +293,7 @@ class PDFCreator {
         pdfCreator.addParagraph("Protein is very important for building muscle, It is much easier to get the required amount of daily protein by drinking a chocolate protein shake than it is through eating meat alone.");
         
         pdfCreator.addImage(protein, 'jpg', 50,50);
-
+        await setStateAsync({pdfProgress:60});
         pdfCreator.link("Gold Standard 100% Whey Protein", "https://amzn.to/2l7VGDd");
 
         pdfCreator.addHeading2("Thermogenic - For Burning Fat and Energy")
@@ -304,7 +311,7 @@ class PDFCreator {
         pdfCreator.addParagraph("Name: "+routinedata.name);
         pdfCreator.addParagraph("Volume: "+routinedata.volume + " rep(s)");
         pdfCreator.addParagraph("Frequency: "+routinedata.frequency+ " time(s) per week");
-        
+
         var repScheme = routinedata.repScheme.sets+" set(s) of "+
         routinedata.repScheme.reps+" rep(s)";
         pdfCreator.addParagraph("Rep Scheme: "+repScheme);
@@ -313,7 +320,7 @@ class PDFCreator {
         var equipment =  routinedata.exerciseTypes.join(", ");
   
         pdfCreator.addParagraph("Equipment: "+equipment);
-
+        await setStateAsync({pdfProgress:70});
         for (var i in routinedata.workoutDays) {
 
             var workoutDay = routinedata.workoutDays[i];
@@ -341,7 +348,7 @@ class PDFCreator {
         pdfCreator.addParagraph("I wish you the best in your fitness journey,");
         pdfCreator.addParagraph("-Wes");
 
-        pdfCreator.save();
+        return pdfCreator.getURI();
     }
 
     
