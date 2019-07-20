@@ -169,8 +169,8 @@ class WorkoutGenerator extends React.Component {
         if (this.state.showDownloadButton == true) {
           downloadRoutine = (
             <div style={{position:"fixed",right:"3.8em",top:"0.5em"}}>
-                <Button variant="warning" className="circle"  onClick={() => {this.setState({showEmailModal:true})}}>
-                  <MdGetApp></MdGetApp>
+                <Button variant="warning" style={{fontWeight:"bold",color:"white"}} className="circle"  onClick={() => {this.setState({showEmailModal:true})}}>
+                  {/* <MdGetApp></MdGetApp> */} Download
                 </Button>
             </div>
           ) 
