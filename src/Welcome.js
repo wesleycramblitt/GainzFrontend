@@ -20,8 +20,16 @@ class Welcome extends React.Component {
                                     Gainz generates completely free weekly workout routines based on your fitness goals. 
                                 </p>
                                 <p>
-                                    Each routine is intelligently generated to balance muscle groups and pick a workout split best fitting
-                                    the parameters you enter. 
+                                    Each routine is intelligently generated to balance muscle groups while picking a perfect muscle group split.
+                                </p>
+                                <p>
+                                    The routine generated will have the chosen frequency, volume, and equipment you choose.
+                                </p>
+                                <p>
+                                    If you are unfamiliar with these terms you can simply select your fitness goal and hit generate.
+                                </p>
+                                <p>
+                                    If you would like to download a routine, click the "Download" button and enter your email. No other information is required and the routine will be sent to your email.
                                 </p>
 
                                     <Col className="text-center">

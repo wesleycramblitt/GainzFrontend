@@ -214,7 +214,7 @@ class WorkoutGenerator extends React.Component {
                           >
                   <Modal.Body>
                     <p>Please enter your email address to receive your free workout routine.</p>
-                    <p>Your email will not be shared with anyone else.</p>
+                    <p>No other information is required and the routine will be immediately emailed to you.</p>
                     <Form.Group>
                       <Form.Label>Email: </Form.Label>
                       <Form.Control ref={this.email} type="email" placeholder="Email..." required></Form.Control>
